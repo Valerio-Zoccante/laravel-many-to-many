@@ -3,6 +3,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                @foreach ($erros->all() as $message)
+                    {{$message}}
+                @endforeach
                 <form class="" action="{{route('admin.pages.store')}}" method="POST">
                     @csrf
                     @method('POST')
