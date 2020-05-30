@@ -4,6 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use App\Page;
+use App\Category;
+use App\User;
+use App\Tag;
+use App\Photo;
+
+
+
 
 class PageController extends Controller
 {
