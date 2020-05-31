@@ -82,7 +82,7 @@ class PageController extends Controller
         $page->tags()->attach($data['tags']);
         $page->photos()->attach($data['photos']);
 
-        return redirect()->route('admin.pages.show', $page);
+        return redirect()->route('admin.pages.show', $page->id);
     }
 
     /**
@@ -93,7 +93,8 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        return view('admin.pages.show', compact('page'));
     }
 
     /**
