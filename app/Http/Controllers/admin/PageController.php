@@ -155,6 +155,13 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $page->tags()->detach();
+        $page->photos()->detach();
+        $deleted = $page->delete();
+        if(!$deleted) {
+            return redirect()->back();
+        }
+        return redirect()->route('admin.pages.index');
     }
 }
