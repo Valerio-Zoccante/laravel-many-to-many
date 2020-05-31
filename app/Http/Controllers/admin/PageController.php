@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 use App\Page;
 use App\Category;
@@ -50,7 +51,9 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
           'title' => 'required|max:100',
           'body' => 'required',
           'tags' => 'required|array',
@@ -66,6 +69,20 @@ class PageController extends Controller
                 ->withInput();
             }
 
+        $page = new Page;
+        $data['slug'] = Str::slug($data['title'] , '-');
+        $data['user_id'] = Auth::id();
+        $page->fill($data);
+        $saved = $page->save();
+
+        if(!$saved) {
+            abort('404');
+        }
+
+        $page->tags()->attach($data['tags']);
+        $page->photos()->attach($data['photos']);
+
+        return redirect()->route('admin.pages.show', $page);
     }
 
     /**
