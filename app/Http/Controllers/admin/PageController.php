@@ -121,7 +121,30 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $page = Page::findOrFail($id);
+        $data = $request->all();
+        $userId = Auth::id();
+        $author = $page->user_id;
+        if($userId != $author) {
+            abort('404');
+        }
+
+        //validazione
+
+        $page->fill($data);
+        $updated = $page->update();
+        if (!$updated) {
+            return redirect()->back();
+        }
+
+        //alternativa
+        // $page->tags()->detach();
+        // $page->tags()->attach($data['tags']);
+
+        $page->photos()->sync($data['photos']);
+        $page->tags()->sync($data['tags']);
+
+        return redirect()->route('admin.pages.show', $page->id);
     }
 
     /**

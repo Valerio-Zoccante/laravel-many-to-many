@@ -34,7 +34,7 @@
                                 <td>{{$page->created_at}}</td>
                                 <td>{{$page->updated_at}}</td>
                                 <td><a class="btn btn-primay" href="{{route('admin.page.show', $page->id)}}">Visualizza</a></td>
-                                <td>Modifica</td>
+                                <td><a class="btn btn-primay" href="{{route('admin.page.edit', $page->id)}}">Modifica</a></td>
                                 <td>Elimina</td>
                             </tr>
                         @endforeach
