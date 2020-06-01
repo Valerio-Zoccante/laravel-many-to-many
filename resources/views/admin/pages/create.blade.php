@@ -33,15 +33,12 @@
                         @foreach ($tags as $tag)
                             <label for="tags-{{$tag->id}}">{{$tag->name}}</label>
                             {{-- deve essere in un array tags per la store, se fai dd è chiave valore --}}
-                            <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags-{{$tag->id}} {{(is_array(old('tags')) && in_array($tag->id, old('tags'))) ? 'checked' : ''}}>
+                            <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags-{{$tag->id}}" {{(is_array(old('tags')) && in_array($tag->id, old('tags'))) ? 'checked' : ''}}>
                         @endforeach
                     </div>
                     <div class="form-group">
-                        @foreach ($photos as $photo)
-                            <label for="photos-{{$photo->id}}">{{$photo->name}}</label>
-                            {{-- deve essere in un array photos per la store, se fai dd sulla store della request è chiave valore --}}
-                            <input type="checkbox" value="{{$photo->id}}" name="photos[]" id="photos-{{$photo->id}}">
-                        @endforeach
+                        <label for="photo">Fotografia</label>
+                        <input type="file" name="photo" id="photo">
                     </div>
                     <input type="submit" class="btn btn-primary" value="Salva">
                 </form>
