@@ -30,10 +30,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        @foreach ($tags as $key => $tag)
+                        @foreach ($tags as $tag)
                             <label for="tags-{{$tag->id}}">{{$tag->name}}</label>
                             {{-- deve essere in un array tags per la store, se fai dd è chiave valore --}}
-                            <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags-{{$tag->id}} {{(!empty(old('tags.'. $key))) ? 'checked' : ''}}>
+                            <input type="checkbox" value="{{$tag->id}}" name="tags[]" id="tags-{{$tag->id}} {{(is_array(old('tags')) && in_array($tag->id, old('tags'))) ? 'checked' : ''}}>
                         @endforeach
                     </div>
                     <div class="form-group">
