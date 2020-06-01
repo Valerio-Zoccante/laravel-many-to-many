@@ -6,7 +6,7 @@
                 @foreach ($erros->all() as $message)
                     {{$message}}
                 @endforeach
-                <form class="" action="{{route('admin.pages.store')}}" method="POST">
+                <form class="" action="{{route('admin.pages.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="form-group">
