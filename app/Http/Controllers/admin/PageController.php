@@ -60,7 +60,6 @@ class PageController extends Controller
           'title' => 'required|max:100',
           'body' => 'required',
           'tags' => 'required|array',
-          'photos' => 'required|array',
           'category_id' => 'required|exists:categories,id',
           'tags.*' => 'exists:tags,id'
         ]);
@@ -92,7 +91,7 @@ class PageController extends Controller
         }
 
         $page->tags()->attach($data['tags']);
-        
+
         if(!empty($photo)) {
             $page->photos()->attach($photo);
         }
